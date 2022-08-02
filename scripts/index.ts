@@ -1,1 +1,1 @@
-export * from './getWallet'
+export {getWallet} from './getWallet'
