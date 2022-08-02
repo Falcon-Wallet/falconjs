@@ -1,0 +1,24 @@
+{
+  "name": "@falcon-wallet/falconjs",
+  "version": "1.0.0",
+  "description": "A javascript NPM package for Falcon Wallet",
+  "main": "index.ts",
+  "scripts": {
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Falcon-Wallet/falconjs.git"
+  },
+  "keywords": [
+    "Falcon Wallet",
+    "Cosmos",
+    "Cosmos SDK",
+    "IBC"
+  ],
+  "author": "Carson Aberle",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Falcon-Wallet/falconjs/issues"
+  },
+  "homepage": "https://github.com/Falcon-Wallet/falconjs#readme"
+}
