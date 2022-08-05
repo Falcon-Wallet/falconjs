@@ -10,8 +10,7 @@
   "scripts": {
     "build": "tsc",
     "dev": "tsc --watch",
-    "prepublish": "yarn build",
-    "prepublishOnly": "yarn lint",
+    "prepublishOnly": "yarn build",
     "preversion": "yarn lint",
     "version": "yarn format && git add -A src",
     "postversion": "git push && git push --tags",
