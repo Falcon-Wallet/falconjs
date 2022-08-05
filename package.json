@@ -2,8 +2,21 @@
   "name": "@falcon-wallet/falconjs",
   "version": "1.0.1",
   "description": "A javascript NPM package for Falcon Wallet",
-  "main": "index.ts",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "prepare": "yarn build",
+    "prepublishOnly" : "yarn lint",
+    "preversion" : "yarn lint",
+    "version" : "yarn format && git add -A src",
+    "postversion" : "git push && git push --tags",
+    "lint": "eslint --ignore-path .eslintignore --ext .js,.ts .",
+    "format": "prettier --ignore-path .gitignore --write \"**/*.+(js|ts|json)\""
   },
   "repository": {
     "type": "git",
@@ -20,5 +33,12 @@
   "bugs": {
     "url": "https://github.com/Falcon-Wallet/falconjs/issues"
   },
-  "homepage": "https://github.com/Falcon-Wallet/falconjs#readme"
+  "homepage": "https://github.com/Falcon-Wallet/falconjs#readme",
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.32.0",
+    "@typescript-eslint/parser": "^5.32.0",
+    "eslint": "^8.21.0",
+    "prettier": "^2.7.1",
+    "typescript": "^4.7.4"
+  }
 }
