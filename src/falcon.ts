@@ -1,15 +1,20 @@
 import { AccountData, DirectSignResponse } from '@cosmjs/proto-signing';
 import { fromHex, toHex } from '@cosmjs/encoding';
 import { SignDoc } from 'cosmjs-types/cosmos/tx/v1beta1/tx';
-import { WindowPostMessageStream } from '@metamask/post-message-stream';
 import Long from 'long';
 import { CosmJSOfflineDirectSigner } from './cosmjs';
 import { capitalize } from './utils';
 
-export class Falcon {
-  constructor(protected stream: WindowPostMessageStream) {}
+type EventListener = {
+  addMessageListener: (fn: (e: any) => void) => void;
+  removeMessageListener: (fn: (e: any) => void) => void;
+  postMessage: (message: any) => void;
+};
 
-  protected _handleRequest(type: string, payload: any): Promise<any> {
+export class Falcon {
+  constructor(protected eventListener: EventListener) {}
+
+  protected _handleRequest(type: string, payload?: any): Promise<any> {
     return new Promise((resolve, reject) => {
       const handleResponse = (response) => {
         if (!response) {
@@ -25,13 +30,13 @@ export class Falcon {
         }
         resolve(response.payload);
       };
-      this.stream.write({ type, payload, falcon: true });
-      this.stream.on('data', handleResponse);
+      this.eventListener.postMessage({ type, payload, falcon: true });
+      this.eventListener.addMessageListener(handleResponse);
     });
   }
 
   async connect(): Promise<void> {
-    await this._handleRequest('connect', undefined);
+    await this._handleRequest('connect');
   }
 
   async signDirect(
