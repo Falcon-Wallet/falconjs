@@ -16,19 +16,18 @@ export class Falcon {
 
   protected _handleRequest(type: string, payload?: any): Promise<any> {
     return new Promise((resolve, reject) => {
-      const handleResponse = (response) => {
-        if (!response) {
+      const handleResponse = (event: MessageEvent) => {
+        const { data } = event;
+        if (!data) {
           reject(new Error('Response is null'));
         }
-        if (response.type !== `on${capitalize(type)}`) {
-          reject(
-            new Error(`Mismatched response type ${type} ${response.type}`)
-          );
+        if (data.type !== `on${capitalize(type)}`) {
+          reject(new Error(`Mismatched response type ${type} ${data.type}`));
         }
-        if (response.payload && response.payload.error) {
-          reject(new Error(response.payload.error));
+        if (data.payload && data.payload.error) {
+          reject(new Error(data.payload.error));
         }
-        resolve(response.payload);
+        resolve(data.payload);
       };
       this.eventListener.postMessage({ type, payload, falcon: true });
       this.eventListener.addMessageListener(handleResponse);
