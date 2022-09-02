@@ -29,6 +29,8 @@ export interface BaseFalcon {
   getOfflineSigner(chainId: string): OfflineSigner;
   getOfflineAminoSigner(chainId: string): OfflineSigner;
   getOfflineSignerAuto(chainId: string): Promise<OfflineSigner>;
+  // TODO: Update this to return a ChainConfig instead of any
+  getChainConfig(chainId: string): Promise<any>;
   importZone(config: unknown): Promise<void>;
 }
 
