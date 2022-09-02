@@ -1,6 +1,6 @@
 {
   "name": "@falcon-wallet/falconjs",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "A javascript NPM package for Falcon Wallet",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
